@@ -32,3 +32,11 @@ def get_all_games():
 
 def get_game(game_id):
     return api.nba.teams.get(game_id)
+
+
+# ----------------------------------------------------------------
+# Stat leaders API requests
+# ----------------------------------------------------------------
+
+def get_stat_leaders(stat_type, season):
+    return api.nba.leaders.get(stat_type=stat_type, season=season)
