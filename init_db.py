@@ -1,4 +1,8 @@
-from database import engine, Base
-import models
+from pathlib import Path
+from database import cur, conn
 
-Base.metadata.create_all(bind=engine)
+schema_path = Path(__file__).parent/"schema.sql"
+with open(schema_path, "r") as file:
+    cur.execute(file.read())
+
+conn.commit()

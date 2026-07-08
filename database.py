@@ -1,11 +1,8 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+import psycopg2
 from dotenv import load_dotenv
 load_dotenv()
 import os
+from pathlib import Path
 
-engine = create_engine(os.getenv('DATABASE_URL'))
-SessionLocal = sessionmaker(bind=engine)
-
-class Base(DeclarativeBase):
-    pass
+conn = psycopg2.connect(host="localhost", dbname="stats_db", user="ingrid", password=os.getenv("DB_PASS"))
+cur = conn.cursor()
