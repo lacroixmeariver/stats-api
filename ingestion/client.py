@@ -1,4 +1,4 @@
-from services import api
+from services.balldontlie import api
 # just client services and json responses
 
 # ----------------------------------------------------------------
@@ -10,6 +10,10 @@ def get_all_players():
 
 def get_player(player_id):
     return api.nba.players.get(player_id)
+
+# need the paid tier to access
+# def get_all_active_players():
+#     return api.nba.players.list_active()
 
 # ----------------------------------------------------------------
 # Team API requests 
@@ -29,7 +33,7 @@ def get_all_games():
     return api.nba.games.list()
 
 def get_game(game_id):
-    return api.nba.teams.get(game_id)
+    return api.nba.games.get(game_id)
 
 
 # ----------------------------------------------------------------
