@@ -8,4 +8,4 @@ async def get_games():
 
 @router.get("/{game_id}")
 async def get_game(game_id: int):
-    return api_service.get_player(game_id)
+    return api_service.get_game(game_id)
