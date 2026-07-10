@@ -1,4 +1,5 @@
 from database import pool
+from psycopg2.extras import RealDictCursor
 
 def upsert_single_player(player):
     conn = pool.getconn()
@@ -54,3 +55,17 @@ def upsert_all_players(all_players_data):
     cur.close()
     pool.putconn(conn)
     
+# TODO: replace the team id here with a joined(?) query to teams table
+def get_all_players():
+    conn = pool.getconn()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur.execute(
+        """ SELECT p.first_name, p.last_name, p.position, p.jersey_number, 
+        t.full_name AS team_name, t.abbreviation AS team_abbreviation FROM players p
+        LEFT JOIN teams t ON p.team_id = t.id;""" # using RealDictCursor and alias allows for 
+        # usage as if it were an attribute of player  
+    )
+    result = cur.fetchall()
+    cur.close()
+    pool.putconn(conn)
+    return result
