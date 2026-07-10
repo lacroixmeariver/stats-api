@@ -1,20 +1,3 @@
-CREATE TABLE IF NOT EXISTS players (
-    id INTEGER PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL, 
-    position VARCHAR(10) NOT NULL,
-    height VARCHAR(10) NOT NULL,
-    weight VARCHAR(10) NOT NULL,
-    jersey_number VARCHAR(10) NOT NULL,
-    college VARCHAR(50) NOT NULL,
-    country VARCHAR(50) NOT NULL,
-    draft_year INTEGER,
-    draft_round INTEGER,
-    draft_number INTEGER,
-    team_id INTEGER, 
-    FOREIGN KEY (team_id) REFERENCES teams(id)
-);
-
 CREATE TABLE IF NOT EXISTS teams (
     id INTEGER PRIMARY KEY,
     conference VARCHAR(15),
@@ -24,6 +7,25 @@ CREATE TABLE IF NOT EXISTS teams (
     full_name VARCHAR(50),
     abbreviation VARCHAR(15)
 );
+
+CREATE TABLE IF NOT EXISTS players (
+    id INTEGER PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100), 
+    position VARCHAR(10),
+    height VARCHAR(10),
+    weight VARCHAR(10),
+    jersey_number VARCHAR(10),
+    college VARCHAR(50),
+    country VARCHAR(50),
+    draft_year FLOAT,
+    draft_round FLOAT,
+    draft_number FLOAT,
+    team_id INTEGER, 
+    FOREIGN KEY (team_id) REFERENCES teams(id)
+);
+
+
 
 CREATE TABLE IF NOT EXISTS games (
     id INTEGER PRIMARY KEY,
@@ -57,7 +59,7 @@ CREATE TABLE IF NOT EXISTS games (
     visitor_in_bonus BOOLEAN,
     ist_stage VARCHAR(50),
     home_team_id INTEGER,
-    visitor_team_score INTEGER,
+    visitor_team_id INTEGER,
     FOREIGN KEY (home_team_id) REFERENCES teams(id),
     FOREIGN KEY (visitor_team_id) REFERENCES teams(id)
 );
