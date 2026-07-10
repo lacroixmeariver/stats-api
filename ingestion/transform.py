@@ -1,4 +1,4 @@
-from balldontlie.nba.models import NBAPlayer, NBATeam
+from balldontlie.nba.models import NBAPlayer, NBATeam, NBAGame
 # purely transformation and handling of raw data -> dictionary following defined data model
 
 # balldontlie sdk returns an object of class NBAPlayer 
@@ -41,3 +41,19 @@ def transform_all_teams(raw_teams: list[NBATeam]) -> list[dict]:
     for team in raw_teams:
         teams.append(transform_team(team))
     return teams
+
+
+def transform_game(raw: NBAGame) -> dict:
+    return {
+        "id": raw.id,
+        "date": raw.date,
+        "season": raw.season,
+        "status": raw.status,
+        "period": raw.period,
+        "time": raw.time,
+        "postseason": raw.postseason,
+        "home_team_score": raw.home_team_score,
+        "visitor_team_score": raw.visitor_team_score,
+        "home_team_id": raw.home_team.id,
+        "visitor_team_id": raw.visitor_team.id
+    }
